@@ -1,0 +1,171 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222 47% 6%;
+    --foreground: 210 40% 96%;
+    --card: 222 40% 10%;
+    --card-foreground: 210 40% 96%;
+    --popover: 222 40% 10%;
+    --popover-foreground: 210 40% 96%;
+    --primary: 187 85% 53%;
+    --primary-foreground: 222 47% 6%;
+    --secondary: 280 70% 50%;
+    --secondary-foreground: 210 40% 96%;
+    --muted: 222 30% 16%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 45 95% 55%;
+    --accent-foreground: 222 47% 6%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 210 40% 96%;
+    --border: 222 30% 18%;
+    --input: 222 30% 18%;
+    --ring: 187 85% 53%;
+    --radius: 0.25rem;
+
+    --neon-cyan: 187 85% 53%;
+    --neon-pink: 320 85% 60%;
+    --neon-gold: 45 95% 55%;
+    --neon-green: 142 70% 50%;
+    --neon-purple: 280 70% 60%;
+    --arcade-bg: 222 47% 6%;
+    --arcade-bg-deep: 230 50% 3%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    background: linear-gradient(180deg, hsl(230 50% 3%) 0%, hsl(222 47% 6%) 40%, hsl(250 40% 8%) 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  .font-pixel {
+    font-family: var(--font-press-start), monospace;
+  }
+
+  .pixel-border {
+    box-shadow:
+      0 0 0 2px hsl(var(--foreground)),
+      4px 4px 0 0 hsl(0 0% 0% / 0.5);
+    border: 2px solid hsl(var(--foreground));
+  }
+
+  .pixel-border-cyan {
+    box-shadow:
+      0 0 0 2px hsl(var(--neon-cyan)),
+      0 0 12px hsl(var(--neon-cyan) / 0.4),
+      4px 4px 0 0 hsl(0 0% 0% / 0.5);
+    border: 2px solid hsl(var(--neon-cyan));
+  }
+
+  .pixel-border-pink {
+    box-shadow:
+      0 0 0 2px hsl(var(--neon-pink)),
+      0 0 12px hsl(var(--neon-pink) / 0.4),
+      4px 4px 0 0 hsl(0 0% 0% / 0.5);
+    border: 2px solid hsl(var(--neon-pink));
+  }
+
+  .pixel-border-gold {
+    box-shadow:
+      0 0 0 2px hsl(var(--neon-gold)),
+      0 0 12px hsl(var(--neon-gold) / 0.4),
+      4px 4px 0 0 hsl(0 0% 0% / 0.5);
+    border: 2px solid hsl(var(--neon-gold));
+  }
+
+  .pixel-border-green {
+    box-shadow:
+      0 0 0 2px hsl(var(--neon-green)),
+      0 0 12px hsl(var(--neon-green) / 0.4),
+      4px 4px 0 0 hsl(0 0% 0% / 0.5);
+    border: 2px solid hsl(var(--neon-green));
+  }
+
+  .text-glow-cyan {
+    text-shadow: 0 0 8px hsl(var(--neon-cyan) / 0.6), 0 0 16px hsl(var(--neon-cyan) / 0.3);
+  }
+
+  .text-glow-pink {
+    text-shadow: 0 0 8px hsl(var(--neon-pink) / 0.6), 0 0 16px hsl(var(--neon-pink) / 0.3);
+  }
+
+  .text-glow-gold {
+    text-shadow: 0 0 8px hsl(var(--neon-gold) / 0.6), 0 0 16px hsl(var(--neon-gold) / 0.3);
+  }
+
+  .text-glow-green {
+    text-shadow: 0 0 8px hsl(var(--neon-green) / 0.6), 0 0 16px hsl(var(--neon-green) / 0.3);
+  }
+
+  .hud-panel {
+    background: hsl(222 40% 10% / 0.85);
+    backdrop-filter: blur(8px);
+    border: 2px solid hsl(var(--neon-cyan) / 0.5);
+    box-shadow: 0 0 12px hsl(var(--neon-cyan) / 0.2), inset 0 0 8px hsl(var(--neon-cyan) / 0.05);
+  }
+
+  .arcade-card {
+    background: hsl(222 40% 10% / 0.9);
+    border: 2px solid hsl(var(--border));
+    transition: all 0.2s ease;
+  }
+
+  .arcade-card:hover {
+    border-color: hsl(var(--neon-cyan));
+    box-shadow: 0 0 16px hsl(var(--neon-cyan) / 0.3), 4px 4px 0 0 hsl(0 0% 0% / 0.5);
+    transform: translate(-2px, -2px);
+  }
+
+  .scanlines::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+      0deg,
+      hsl(0 0% 0% / 0.08) 0px,
+      hsl(0 0% 0% / 0.08) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  .pixel-corners {
+    clip-path: polygon(
+      0 4px, 4px 4px, 4px 0,
+      calc(100% - 4px) 0, calc(100% - 4px) 4px, 100% 4px,
+      100% calc(100% - 4px), calc(100% - 4px) calc(100% - 4px),
+      calc(100% - 4px) 100%, 4px 100%, 4px calc(100% - 4px), 0 calc(100% - 4px)
+    );
+  }
+}
+
+@layer utilities {
+  .image-pixelated {
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
